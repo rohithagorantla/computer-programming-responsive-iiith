@@ -169,16 +169,9 @@ window.view = {
 		var inputValue = document.getElementById('simpleLoopInput').value
 		if (selected_loop === 'for' && inputValue !== '' && !isNaN(model.inp) )
 		{
-			this.displayLoop('forLoopContent', 'codeContentFor1')
-		}
-		if (selected_loop === 'while' && inputValue !== '' && !isNaN(model.inp))
+		if(model.inp >= 0 && model.inp <=20)
 		{
-			this.displayLoop('whileLoopContent', 'codeContentWhile1')
-		}
-		if (selected_loop === 'do-while' && inputValue !== '' && !isNaN(model.inp))
-		{
-		 	this.displayLoop('dowhileLoopContent', 'codeContentDoWhile1')
-		}
+		this.displayLoop('forLoopContent', 'codeContentFor1')
 		this.disableButton('btnStart')
 		this.changeClass( 'btnStart', 'buttonDisable startButton')
 		this.enableButton('btnNext')
@@ -186,6 +179,49 @@ window.view = {
 		this.disableButton('loopList')
 		this.changeClass( 'loopList', 'buttonDisable loopList')
 		this.disableButton('simpleLoopInput')
+		}
+		else {
+			alert('Input ranges between 0 and 20');
+			
+		}
+		}
+		if (selected_loop === 'while' && inputValue !== '' && !isNaN(model.inp))
+		{
+		if(model.inp >= 0 && model.inp <=20)
+		{
+		this.displayLoop('whileLoopContent', 'codeContentWhile1')
+		this.disableButton('btnStart')
+		this.changeClass( 'btnStart', 'buttonDisable startButton')
+		this.enableButton('btnNext')
+		this.changeClass( 'btnNext', 'button nextButton')
+		this.disableButton('loopList')
+		this.changeClass( 'loopList', 'buttonDisable loopList')
+		this.disableButton('simpleLoopInput')
+		}
+		else {
+			alert('Input ranges between 0 and 20');
+		}
+		}
+		if (selected_loop === 'do-while' && inputValue !== '' && !isNaN(model.inp))
+		{
+			if(model.inp >= 0 && model.inp <=20)
+		{
+		this.disableButton('btnStart')
+		this.changeClass( 'btnStart', 'buttonDisable startButton')
+		this.enableButton('btnNext')
+		this.changeClass( 'btnNext', 'button nextButton')
+		this.disableButton('loopList')
+		this.changeClass( 'loopList', 'buttonDisable loopList')
+		this.disableButton('simpleLoopInput')
+		
+		 	this.displayLoop('dowhileLoopContent', 'codeContentDoWhile1')
+		}
+		else {
+			alert('Input ranges between 0 and 20');
+			
+		}
+		}
+		
 	},
 	updateModelAndShowResult: function() {
 		if( model.inp >= 1)
@@ -235,6 +271,7 @@ window.view = {
 	nextBtn: function () {
 		this.lastRedDiv = this.getLastHighlightedDiv()
 		this.nextRedDiv = this.getNextDivToHighlight(this.lastRedDiv)
+		
 		if( model.inp === 0 )
 		{	
 			if( this.lastRedDiv.id !== 'codeContentFor6' && this.lastRedDiv.id !== 'codeContentWhile6' && this.lastRedDiv.id !== 'codeContentDoWhile7' )
@@ -271,6 +308,7 @@ window.view = {
 					this.highlightNextStep()
 			}
 		}
+		
 	},
 	startBtnNested: function() {
 		this.getNestedInput()
